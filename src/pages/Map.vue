@@ -93,10 +93,10 @@ class MapPage extends Vue {
   mapOptions = {
     zoomSnap: 0.5
   };
-  zoomUpdate(zoom) {
+  zoomUpdate(zoom: number) {
     this.currentZoom = zoom;
   }
-  centerUpdate(center) {
+  centerUpdate(center: any) {
     this.currentCenter = center;
   }
   showLongText() {
