@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="hhr lpr ffr">
+  <!-- <q-layout view="hhr lpr ffr"> -->
     <!-- <q-drawer v-model="drawerRight" side="right" bordered>
       <div class="q-pa-sm">
         <div v-for="n in 50" :key="n">Drawer {{ n }} / 50</div>
@@ -69,7 +69,7 @@
         </q-page-sticky> -->
       </q-page>
     <!-- </q-page-container> -->
-  </q-layout>
+  <!-- </q-layout> -->
 </template>
 
 <script lang="ts">

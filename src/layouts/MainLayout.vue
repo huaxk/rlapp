@@ -1,6 +1,7 @@
 <template>
+<div class="q-pa-none">
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="glossy">
+    <q-header class="glossy">
       <q-toolbar>
         <q-btn
           flat
@@ -120,6 +121,7 @@
       <router-view/>
     </q-page-container>
   </q-layout>
+</div>
 </template>
 
 <script lang="ts">
