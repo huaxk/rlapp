@@ -57,6 +57,11 @@
               </div>
             </l-tooltip>
           </l-marker>
+          <l-geo-json
+            :geojson="geojson"
+            :options="options"
+            :options-style="styleFunction"
+          />
         </l-map>
         <!-- <q-page-sticky position="right" :offset="[-20, 0]" style="z-index:999">
           <q-btn
@@ -86,7 +91,8 @@ import {
   LControlLayers,
   LControlZoom,
   LControlScale,
-  LControlAttribution
+  LControlAttribution,
+  LGeoJson
 } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -101,11 +107,13 @@ import "leaflet/dist/leaflet.css";
     LControlLayers,
     LControlZoom,
     LControlScale,
-    LControlAttribution
+    LControlAttribution,
+    LGeoJson
   }
 })
 class MapPage extends Vue {
   drawerRight = false;
+  loading = false;
 
   mapOptions = {
     zoomControl: false,
@@ -133,6 +141,32 @@ class MapPage extends Vue {
   currentZoom = 11.5;
   currentCenter = latLng(47.41322, -1.219482);
   showParagraph = false;
+  geojson = null;
+
+  get options() {
+    return {
+      // onEachFeature: this.onEachFeatureFunction
+    }
+  }
+
+  get styleFunction() {
+    return () => {
+      return {
+        fill: false
+      }
+    }
+  }
+
+  mounted() {
+    this.loading = true;
+    this.$axios
+      .get("http://localhost:8080/cities")
+      .then(response => {
+        this.geojson = response.data;
+        // console.log(this.geojson)
+        this.loading = false
+      })
+  }
 
   zoomUpdate(zoom: number) {
     this.currentZoom = zoom;
