@@ -114,7 +114,22 @@
     </q-drawer>
 
     <q-drawer v-model="right" side="right" bordered>
-      <q-date v-model="date"/>
+      <!-- <q-date v-model="date"/> -->
+      <div class="q-mini-drawer-hide absolute" style="top: 500px; right: 285px">
+          <q-btn
+            dense
+            round
+            unelevated
+            color="blue"
+            icon="chevron_left"
+            @click="right = !right"
+          />
+        </div>
+        <q-btn
+          icon="mail"
+          label="加载"
+          @click="updateGeojson"
+        />
     </q-drawer>
 
     <q-page-container>
@@ -125,19 +140,26 @@
 </template>
 
 <script lang="ts">
-// import { openURL } from "quasar";
 import { Vue, Component } from "vue-property-decorator"
+import { getModule } from "vuex-module-decorators";
+import geo from '../store/geo'
 
-// import Vue from "vue";
 @Component
 class MainLayout extends Vue {
   name = "MyLayout"
   right = false
   date = "2019/02/01"
   leftDrawerOpen = this.$q.platform.is.desktop
-  // methods: {
-  //   openURL
-  // }
+
+  geo = getModule(geo, this.$store)
+
+  updateGeojson() {
+    // this.$store.dispatch('example/loadgeo')
+    // this.$store.dispatch('geo/loadmutategeo')
+    this.loading = true
+    this.geo.loadmutategeo()
+    this.loading = false
+  }
 }
 
 export default MainLayout;

@@ -1,1 +1,3 @@
-export function someMutation(/* state */) {}
+export function updateGeojson(state: any, data: object) {
+    state.geojson = data
+}

@@ -58,7 +58,7 @@
             </l-tooltip>
           </l-marker>
           <l-geo-json
-            :geojson="geojson"
+            :geojson="geo.geojson"
             :options="options"
             :options-style="styleFunction"
           />
@@ -79,6 +79,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { getModule } from "vuex-module-decorators";
+
 // import * as L from "leaflet";
 import { latLng } from "leaflet";
 import {
@@ -95,6 +97,7 @@ import {
   LGeoJson
 } from "vue2-leaflet";
 import "leaflet/dist/leaflet.css";
+import GeoModule from "../store/geo";
 
 @Component({
   components: {
@@ -141,7 +144,8 @@ class MapPage extends Vue {
   currentZoom = 11.5;
   currentCenter = latLng(47.41322, -1.219482);
   showParagraph = false;
-  geojson = null;
+
+  geo = getModule(GeoModule, this.$store)
 
   get options() {
     return {
@@ -155,17 +159,6 @@ class MapPage extends Vue {
         fill: false
       }
     }
-  }
-
-  mounted() {
-    this.loading = true;
-    this.$axios
-      .get("http://localhost:8080/cities")
-      .then(response => {
-        this.geojson = response.data;
-        // console.log(this.geojson)
-        this.loading = false
-      })
   }
 
   zoomUpdate(zoom: number) {
