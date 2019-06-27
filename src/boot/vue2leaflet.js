@@ -1,5 +1,5 @@
 import { Icon } from 'leaflet'
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
+import { LMap, LTileLayer } from 'vue2-leaflet'
 
 delete Icon.Default.prototype._getIconUrl
 /* global require */
@@ -12,5 +12,4 @@ Icon.Default.mergeOptions({
 export default async ({ Vue }) => {
   Vue.component('l-map', LMap)
   Vue.component('l-tile-layer', LTileLayer)
-  Vue.component('l-marker', LMarker)
 }

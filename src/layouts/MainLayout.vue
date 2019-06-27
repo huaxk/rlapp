@@ -8,7 +8,7 @@
           dense
           round
           icon="menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="toggleLeftDrawer"
           aria-label="Menu"
         >
           <!-- <q-icon name="menu" /> -->
@@ -28,7 +28,7 @@
           @click="$q.fullscreen.toggle()"
           class="q-ml-xs"
         /> -->
-        <q-btn dense flat round icon="apps" @click="right = !right"/>
+        <q-btn dense flat round icon="apps" @click="toggleRightDrawer"/>
       </q-toolbar>
     </q-header>
 
@@ -113,8 +113,7 @@
       </q-img> -->
     </q-drawer>
 
-    <q-drawer v-model="right" side="right" bordered>
-      <!-- <q-date v-model="date"/> -->
+    <q-drawer v-model="rightDrawerOpen" side="right" bordered>
       <div class="q-mini-drawer-hide absolute" style="top: 500px; right: 285px">
           <q-btn
             dense
@@ -122,7 +121,7 @@
             unelevated
             color="blue"
             icon="chevron_left"
-            @click="right = !right"
+            @click="toggleRightDrawer"
           />
         </div>
         <q-btn
@@ -147,15 +146,19 @@ import geo from '../store/geo'
 @Component
 class MainLayout extends Vue {
   name = "MyLayout"
-  right = false
-  date = "2019/02/01"
   leftDrawerOpen = this.$q.platform.is.desktop
+  rightDrawerOpen = false
+
+  toggleLeftDrawer() {
+    this.leftDrawerOpen = !this.leftDrawerOpen
+  }
+  toggleRightDrawer() {
+    this.rightDrawerOpen = !this.rightDrawerOpen
+  }
 
   geo = getModule(geo, this.$store)
 
   updateGeojson() {
-    // this.$store.dispatch('example/loadgeo')
-    // this.$store.dispatch('geo/loadmutategeo')
     this.loading = true
     this.geo.loadmutategeo()
     this.loading = false

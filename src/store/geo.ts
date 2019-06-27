@@ -1,6 +1,5 @@
 import { Module, VuexModule, Mutation, Action, MutationAction } from "vuex-module-decorators";
 import axios from 'axios'
-import { async } from "q";
 
 @Module({namespaced: true, name: 'geo'})
 export default class GeoModule extends VuexModule {
@@ -15,14 +14,14 @@ export default class GeoModule extends VuexModule {
 
   @Action({ commit: 'updateGeojson' })
   async loadgeo() {
-    const resp = await axios.get("http://localhost:8080/cities")
+    const resp = await axios.get("cities")
     // this.context.commit('updateGeojson', resp.data)
     return resp.data
   }
 
   @MutationAction({ mutate: ['geojson']})
   async loadmutategeo() {
-    const resp = await axios.get("http://localhost:8080/cities")
+    const resp = await axios.get("cities")
     return {geojson: resp.data}
   }
 }
