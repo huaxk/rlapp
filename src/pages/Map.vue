@@ -36,8 +36,8 @@ import { Component, Vue } from "vue-property-decorator";
 import { getModule } from "vuex-module-decorators";
 
 import * as L from "leaflet";
-import * as proj4leaflet from "proj4leaflet";
-import * as proj4 from 'proj4';
+import "proj4leaflet";
+// import * as proj4 from 'proj4';
 import {
   LIcon,
   LPopup,

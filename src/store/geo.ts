@@ -1,14 +1,13 @@
 import { Module, VuexModule, Mutation, Action, MutationAction } from "vuex-module-decorators";
 import axios from 'axios'
+import { FeatureCollection } from "geojson";
 
 @Module({namespaced: true, name: 'geo'})
 export default class GeoModule extends VuexModule {
-  // public static namespaced = true
-
-  public geojson: Array<object> = []
+  public geojson: FeatureCollection = { type: "FeatureCollection", features: []}
 
   @Mutation
-  updateGeojson(data: Array<object>) {
+  updateGeojson(data: FeatureCollection) {
     this.geojson = data
   }
 
